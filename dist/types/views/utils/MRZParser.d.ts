@@ -1,5 +1,5 @@
 import { DSImageData, ParsedResultItem } from "@dynamsoft/dynamsoft-capture-vision-bundle";
-import { ResultStatus } from "./types";
+import { EnumDocumentSide, EnumResultStatus } from "./types";
 export declare enum EnumMRZData {
     InvalidFields = "invalidFields",
     DocumentType = "documentType",
@@ -14,14 +14,16 @@ export declare enum EnumMRZData {
     Nationality = "nationality",
     NationalityRaw = "nationalityRaw",
     DateOfBirth = "dateOfBirth",
-    DateOfExpiry = "dateOfExpiry"
+    DateOfExpiry = "dateOfExpiry",
+    OptionalData1 = "optionalData1",
+    OptionalData2 = "optionalData2"
 }
 export interface MRZResult {
-    status: ResultStatus;
-    originalImageResult?: DSImageData;
+    status?: EnumResultStatus;
     data?: MRZData;
-    imageData?: boolean;
-    _imageData?: DSImageData;
+    getDocumentImage(side: EnumDocumentSide): DSImageData | null;
+    getOriginalImage(side: EnumDocumentSide): DSImageData | null;
+    getPortraitImage(): DSImageData | null;
 }
 export interface MRZData {
     [EnumMRZData.InvalidFields]?: EnumMRZData[];
@@ -38,6 +40,8 @@ export interface MRZData {
     [EnumMRZData.NationalityRaw]: string;
     [EnumMRZData.DateOfBirth]: MRZDate;
     [EnumMRZData.DateOfExpiry]: MRZDate;
+    [EnumMRZData.OptionalData1]?: string;
+    [EnumMRZData.OptionalData2]?: string;
 }
 export interface MRZDate {
     year: number;
@@ -47,4 +51,29 @@ export interface MRZDate {
 export declare const MRZDataLabel: Record<EnumMRZData, string> & Record<string, string>;
 export declare function displayMRZDate(date: MRZDate): string;
 export declare function processMRZData(mrzText: string, parsedResult: ParsedResultItem): MRZData | null;
+/**
+ * Internal implementation of the MRZResult interface.
+ * Construction sites should use createMRZResult() rather than instantiating this directly.
+ */
+export declare class MRZResultImpl implements MRZResult {
+    status?: EnumResultStatus;
+    data?: MRZData;
+    private _primaryOriginalImage;
+    private _secondaryOriginalImage;
+    private _primaryDocumentImage;
+    private _secondaryDocumentImage;
+    private _portraitImage;
+    constructor(init: {
+        status?: EnumResultStatus;
+        data?: MRZData;
+        primaryOriginalImage?: DSImageData | null;
+        secondaryOriginalImage?: DSImageData | null;
+        primaryDocumentImage?: DSImageData | null;
+        secondaryDocumentImage?: DSImageData | null;
+        portraitImage?: DSImageData | null;
+    });
+    getDocumentImage(side: EnumDocumentSide): DSImageData | null;
+    getOriginalImage(side: EnumDocumentSide): DSImageData | null;
+    getPortraitImage(): DSImageData | null;
+}
 //# sourceMappingURL=MRZParser.d.ts.map

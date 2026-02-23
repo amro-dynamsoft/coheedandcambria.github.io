@@ -1,3 +1,7 @@
+export declare enum EnumDocumentSide {
+    MRZ = "mrz",// The side of the document that contains the MRZ (primary side)
+    Opposite = "opposite"
+}
 export declare enum EnumMRZScanMode {
     Passport = "passport",
     TD1 = "td1",

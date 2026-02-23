@@ -13,6 +13,9 @@ export interface MRZScannerConfig {
     resultViewConfig?: MRZResultViewConfig;
     mrzFormatType?: Array<EnumMRZDocumentType>;
     showResultView?: boolean;
+    returnOriginalImage?: boolean;
+    returnDocumentImage?: boolean;
+    returnPortraitImage?: boolean;
 }
 export interface SharedResources {
     cvRouter?: CaptureVisionRouter;
@@ -20,6 +23,9 @@ export interface SharedResources {
     cameraView?: CameraView;
     result?: MRZResult;
     onResultUpdated?: (result: MRZResult) => void;
+    returnOriginalImage?: boolean;
+    returnDocumentImage?: boolean;
+    returnPortraitImage?: boolean;
 }
 declare class MRZScanner {
     private config;

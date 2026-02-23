@@ -2903,12 +2903,31 @@
       width: 100%;
       display: flex;
       justify-content: center;
+      align-items: center;
     }
 
     .dce-scanguide-passport,
     .dce-scanguide-td1,
     .dce-scanguide-td2 {
       display: none;
+    }
+
+    @media (orientation: portrait) {
+      .dce-scanguide-passport,
+      .dce-scanguide-td1,
+      .dce-scanguide-td2 {
+        width: 85%;
+        height: auto;
+      }
+    }
+
+    @media (orientation: landscape) {
+      .dce-scanguide-passport,
+      .dce-scanguide-td1,
+      .dce-scanguide-td2 {
+        height: 50%;
+        width: auto;
+      }
     }
 
     .dce-macro-use-mobile-native-like-ui {
@@ -3036,7 +3055,7 @@
       top: calc(24px + max(3vmin, 24px));
       left: 0;
       background: rgba(100, 100, 100, 0.5);
-      display: flex;
+      display: none;
       z-index: 2;
     }
 

@@ -30,6 +30,8 @@ export default class MRZResultView {
     private handleCancel;
     private handleDone;
     private createControls;
+    private getImagesToDisplay;
+    private createImagesDisplay;
     private handleFieldEdit;
     private createMRZDataDisplay;
     initialize(): Promise<void>;
