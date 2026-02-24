@@ -334,5 +334,5 @@ declare const DynamsoftMRZScanner: {
     MRZResultView: typeof MRZResultView;
 };
 
-export { DEFAULT_TEMPLATE_NAMES, DynamsoftMRZScanner, EnumMRZData, EnumMRZDocumentType, EnumMRZScanMode, EnumMRZScannerViews, EnumResultStatus, MRZDataLabel, MRZResultView, MRZScanner, MRZScannerView, displayMRZDate };
+export { DEFAULT_TEMPLATE_NAMES, DynamsoftMRZScanner, EnumDocumentSide, EnumMRZData, EnumMRZDocumentType, EnumMRZScanMode, EnumMRZScannerViews, EnumResultStatus, MRZDataLabel, MRZResultView, MRZScanner, MRZScannerView, displayMRZDate };
 export type { MRZData, MRZDate, MRZResult, MRZResultViewConfig, MRZResultViewToolbarButtonsConfig, MRZScannerViewConfig, ResultStatus, ToolbarButton, ToolbarButtonConfig, UtilizedTemplateNames };
