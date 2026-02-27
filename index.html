@@ -7,7 +7,7 @@
     <!-- Eruda: mobile dev-tools console (remove before shipping) -->
     <script src="//cdn.jsdelivr.net/npm/eruda"></script>
     <script>eruda.init();</script>
-    <script src="./dist/mrz-scanner.bundle.js"></script>
+    <script src="../dist/mrz-scanner.bundle.js"></script>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -283,6 +283,7 @@
 
           const result = await mrzscanner.launch(file);
           console.log("File scan result:", result);
+          console.log("Full raw MRZ text:", result?.data?.mrzText);
 
           displayResults(result, scenarioNumber, {
             returnOriginalImage,
@@ -344,6 +345,7 @@
 
           const result = await mrzscanner.launch();
           console.log("Scan result:", result);
+          console.log("Full raw MRZ text:", result?.data?.mrzText);
 
           // Display results
           displayResults(result, scenarioNumber, {
@@ -452,10 +454,17 @@
             }
           }
 
+          // Escape HTML special characters so MRZ filler '<' chars aren't treated as tags
+          const safeValue = String(displayValue)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/\n/g, '<br>');
+
           html += `
             <div class="data-field">
               <div class="data-label">${label}:</div>
-              <div class="data-value">${displayValue}</div>
+              <div class="data-value">${safeValue}</div>
             </div>`;
         });
 
